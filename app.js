@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         squares[appleIndex].classList.remove('apple');
         clearInterval(interval);
         score = 0;
-        //random apple
+        randomApple();
         direction = 1;
         scoreDisplay.innerText = score;
         intervalTime = 1000;
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             squares[currentSnake[0]].classList.remove('apple');
             squares[tail].classList.add('snake');
             currentSnake.push(tail);
-            //randomApple();
+            randomApple();
             score++;
             scoreDisplay.textContent = score;
             clearInterval(interval);
@@ -56,6 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
         squares[currentSnake[0]].classList.add('snake');
     }    
 
+    function randomApple() {
+        do {
+            appleIndex = Math.floor(Math.random() * squares.length)
+        } while (squares[appleIndex].classList.contains('snake'))
+        squares[appleIndex].classList.add('apple');
+    }
+
     function control(e) {
         squares[currentIndex].classList.remove('snake');
 
@@ -64,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (e.keyCode === 38) {
             direction = -width;
         } else if (e.keyCode === 37) {
-            direction - 1;
+            direction = - 1;
         } else if (e.keyCode === 40) {
             direction = +width;
         }
